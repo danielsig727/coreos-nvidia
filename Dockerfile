@@ -10,6 +10,7 @@ RUN apt-get -y update && \
 ARG COREOS_RELEASE_CHANNEL=stable
 ARG COREOS_VERSION
 ARG NVIDIA_DRIVER_VERSION
+ARG NVIDIA_DRIVER_CHANNEL=XFree86/Linux-x86_64
 ARG KERNEL_VERSION
 ARG KERNEL_TAG
 
@@ -33,7 +34,7 @@ RUN 7z e /tmp/coreos_developer_container.bin "usr/lib64/modules/*-coreos*/build/
 RUN make modules_prepare
 RUN sed -i -e "s/${KERNEL_VERSION}/$(cat /tmp/kernel.release)/" include/generated/utsrelease.h
 
-ENV NVIDIA_DRIVER_URL http://us.download.nvidia.com/XFree86/Linux-x86_64/${NVIDIA_DRIVER_VERSION}/NVIDIA-Linux-x86_64-${NVIDIA_DRIVER_VERSION}.run
+ENV NVIDIA_DRIVER_URL http://us.download.nvidia.com/${NVIDIA_DRIVER_CHANNEL}/${NVIDIA_DRIVER_VERSION}/NVIDIA-Linux-x86_64-${NVIDIA_DRIVER_VERSION}.run
 
 ENV NVIDIA_PATH /opt/nvidia
 ENV NVIDIA_BUILD_PATH /opt/nvidia/build
