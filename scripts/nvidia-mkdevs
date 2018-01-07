@@ -2,7 +2,7 @@
 PREFIX=/rootfs
 
 # Count the number of NVIDIA controllers found.
-NVDEVS=`lspci | grep -i NVIDIA`
+NVDEVS=`lspci -A linux-proc | grep -i NVIDIA`
 N3D=`echo "$NVDEVS" | grep "3D controller" | wc -l`
 NVGA=`echo "$NVDEVS" | grep "VGA compatible controller" | wc -l`
 N=`expr $N3D + $NVGA - 1`
