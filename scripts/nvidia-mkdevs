@@ -5,7 +5,8 @@ PREFIX=/rootfs
 NVDEVS=`lspci -A linux-proc | grep -i NVIDIA`
 N3D=`echo "$NVDEVS" | grep "3D controller" | wc -l`
 NVGA=`echo "$NVDEVS" | grep "VGA compatible controller" | wc -l`
-N=`expr $N3D + $NVGA - 1`
+NTESLA=`echo "$NVDEVS" | grep "Tesla" | wc -l`
+N=`expr $N3D + $NVGA + $NTESLA - 1`
 
 for i in `seq 0 $N`; do
     rm -f $PREFIX/dev/nvidia$i
